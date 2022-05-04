@@ -1,14 +1,17 @@
 <template>
-    <div>
-      <div v-for="amount in 3" :key="amount">
+  <div>
+    <div class="box">
+      <div v-for="amount in 5" :key="amount">
         <transition name="fade">
           <modal-block v-if="isModal[amount-1]" @close-modal="handleCloseModal(amount)" :amount="amount" />
         </transition>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
+import anime from 'animejs';
 import ModalBlock from './ModalBlock.vue';
 
 export default {
@@ -18,29 +21,47 @@ export default {
   },
   data() {
     return {
-      isModal: [true, true, true],
+      isModal: [true, true, true, true, true],
       soundEffect: new Audio(require('../assets/sound_effect/explosion_3.mp3'))
     }
   },
+  mounted() {
+    return this.animateBlocks()
+  },
   methods: {
     handleCloseModal(e) {
+      this.soundEffect.load();
       this.soundEffect.currentTime= 0;
       this.soundEffect.play();
       this.isModal.splice(e-1, 1, false);
       console.log(this.isModal)
+    },
+    animateBlocks() {
+      anime({
+        targets: '.modal-content',
+        // translateX: function() {
+        //   return anime.random(-100, 100);
+        // },
+        translateY: function() {
+          return anime.random(-30, 30) + 'vh';
+        },
+        // scale: function() {
+        //   return anime.random(0.3, 0.7)
+        // },
+        duration: 1000,
+        delay: anime.stagger(100),
+        complete: this.animateBlocks
+      })
     }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.box{
+  height: 40vh;
+  margin: 0 auto;
+  width: 10%;
 }
 
 .fade-enter-active, .fade-leave-active {
