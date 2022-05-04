@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="modal">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" @click="closeModal(amount)">
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'modal-block',
   props: ['amount'],
