@@ -9,6 +9,7 @@
     </div>
     <timer-component ref="timer" />
     <button @click="lessonStart" class="btn btn-danger">広告っぽいものを出す</button>
+    <h3>{{lessonResult}}</h3>
   </div>
 </template>
 
@@ -25,18 +26,34 @@ export default {
   },
   data() {
     return {
-      isModal: [true, true, true, true, true],
+      isModal: [],
       soundEffect: new Audio(require('../assets/sound_effect/explosion_3.mp3'))
     }
   },
   mounted() {
     return this.animateBlocks()
   },
+  computed: {
+    lessonResult() {
+      var result = ''
+      if(!this.isModal.length) {
+        result = 'がんばってね'
+      }else if(this.isModal[0] == false) {
+        result = 'クリアー'
+      }else{
+        result = 'あと' + this.isModal.filter(n => n == true).length.toString() + '個'
+      }
+      return result
+    }
+  },
   methods: {
     lessonStart() {
       this.$refs.timer.clearAll();
       this.$refs.timer.startTimer();
       this.handleCreateModal();
+    },
+    handleCreateModal() {
+      this.isModal = [true, true, true, true, true]
     },
     handleCloseModal(e) {
       this.soundEffect.load();
