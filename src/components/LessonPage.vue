@@ -8,8 +8,8 @@
       </div>
     </div>
     <timer-component ref="timer" />
-    <button @click="lessonStart" class="btn btn-danger">広告っぽいものを出す</button>
-    <h3>{{lessonResult}}</h3>
+    <button @click="lessonStart" class="btn btn-warning">広告っぽいものを出す</button>
+    <h3>{{lessonResult()}}</h3>
     <transition name="basic">
       <div v-if="hardMode">
         <hard-lesson-page />
@@ -20,9 +20,10 @@
 
 <script>
 import anime from 'animejs'
-import ModalBlock from './ModalBlock.vue'
+import ModalBlock from './ModalBlocks.vue'
 import HardLessonPage from './HardLessonPage.vue'
 import TimerComponent from './TimerComponent.vue'
+
 
 export default {
   name: 'lesson-page',
@@ -40,19 +41,6 @@ export default {
   },
   mounted() {
     return this.animateBlocks()
-  },
-  computed: {
-    lessonResult() {
-      var result = ''
-      if(!this.isModal.length) {
-        result = 'がんばってね'
-      }else if(this.isModal[0] == false) {
-        result = 'クリアーだけれども5秒を切ったらハードモードになるよ'
-      }else{
-        result = 'あと' + this.isModal.filter(n => n == true).length.toString() + '個'
-      }
-      return result
-    }
   },
   methods: {
     lessonStart() {
@@ -87,19 +75,13 @@ export default {
     animateBlocks() {
       anime({
         targets: '.modal-content',
-        // translateX: function() {
-        //   return anime.random(-100, 100);
-        // },
         translateY: function() {
           return anime.random(-30, 30) + 'vh';
         },
-        // scale: function() {
-        //   return anime.random(0.3, 0.7)
-        // },
         duration: 1000,
         delay: anime.stagger(100),
         complete: this.animateBlocks
-      })
+      }).play()
     }
   }
 }
