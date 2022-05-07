@@ -3,12 +3,13 @@
     <div class="modal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
+          <img src="../assets/ads_1.png" width="100%" height="100%">
           <div class="modal-header">
             <button type="button" class="close" @click="closeModal(amount)">
               <span>&times;</span>
             </button>
+            <span>{{amount-1}}</span>
           </div>
-          <h3>{{amount-1}}</h3>
         </div>
       </div>
     </div>
@@ -32,5 +33,20 @@ export default {
 <style scoped>
 .modal {
   display: block;
+}
+
+.modal-content {
+  position: relative;
+  height: 20vh;
+}
+
+.modal-header {
+  position: absolute;
+  width: 100%;
+  border: none;
+}
+
+.close {
+  z-index: 1;
 }
 </style>
