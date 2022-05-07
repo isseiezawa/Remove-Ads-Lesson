@@ -7,17 +7,21 @@
         </transition>
       </div>
     </div>
+    <timer-component ref="timer" />
+    <button @click="lessonStart" class="btn btn-danger">広告っぽいものを出す</button>
   </div>
 </template>
 
 <script>
-import anime from 'animejs';
-import ModalBlock from './ModalBlock.vue';
+import anime from 'animejs'
+import ModalBlock from './ModalBlock.vue'
+import TimerComponent from './TimerComponent.vue'
 
 export default {
   name: 'lesson-page',
   components: {
-    ModalBlock
+    ModalBlock,
+    TimerComponent
   },
   data() {
     return {
@@ -29,12 +33,19 @@ export default {
     return this.animateBlocks()
   },
   methods: {
+    lessonStart() {
+      this.$refs.timer.clearAll();
+      this.$refs.timer.startTimer();
+      this.handleCreateModal();
+    },
     handleCloseModal(e) {
       this.soundEffect.load();
       this.soundEffect.currentTime= 0;
       this.soundEffect.play();
       this.isModal.splice(e-1, 1, false);
       console.log(this.isModal)
+
+      if(this.isModal[0] == false) this.$refs.timer.stopTimer();
     },
     animateBlocks() {
       anime({
