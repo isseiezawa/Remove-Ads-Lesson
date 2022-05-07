@@ -3,7 +3,7 @@
     <div class="modal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <img src="../assets/ads_1.png" width="100%" height="100%">
+          <img src="../assets/ads_1.png" width="100%">
           <div class="modal-header">
             <button type="button" class="close" @click="closeModal(amount)">
               <span>&times;</span>
@@ -37,7 +37,7 @@ export default {
 
 .modal-content {
   position: relative;
-  height: 20vh;
+  height: 10vh;
 }
 
 .modal-header {
