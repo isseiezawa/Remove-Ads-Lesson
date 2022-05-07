@@ -3,12 +3,12 @@
     <div class="modal">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <img src="../assets/ads_1.png" width="100%">
+          <img :src="randomAds" width="100%">
           <div class="modal-header">
-            <button type="button" class="close" @click="closeModal(amount)">
+            <button type="button" class="close" :class="randomPosition" @click="closeModal(amount)">
               <span>&times;</span>
             </button>
-            <span>{{amount-1}}</span>
+            <span class="number">{{amount-1}}</span>
           </div>
         </div>
       </div>
@@ -21,6 +21,16 @@
 
 export default {
   name: 'modal-block',
+  computed: {
+    randomPosition() {
+      var selectPosition = ['float-left', 'mx-auto']
+      return selectPosition[Math.floor( Math.random() * 2)]
+    },
+    randomAds() {
+      // src属性は、静的に指定するときと動的に指定するときで参照方法が変わるためrequire使用
+      return require('@/assets/ads_' + Math.floor( Math.random() * 2 + 1).toString() + '.png')
+    }
+  },
   props: ['amount'],
   methods: {
     closeModal(amount) {
@@ -48,5 +58,13 @@ export default {
 
 .close {
   z-index: 1;
+}
+
+.number {
+  background-color: azure;
+  border: solid 1px black;
+  border-radius: 50%;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 </style>
