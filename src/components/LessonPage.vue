@@ -10,23 +10,31 @@
     <timer-component ref="timer" />
     <button @click="lessonStart" class="btn btn-danger">広告っぽいものを出す</button>
     <h3>{{lessonResult}}</h3>
+    <transition name="basic">
+      <div v-if="hardMode">
+        <hard-lesson-page />
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 import anime from 'animejs'
 import ModalBlock from './ModalBlock.vue'
+import HardLessonPage from './HardLessonPage.vue'
 import TimerComponent from './TimerComponent.vue'
 
 export default {
   name: 'lesson-page',
   components: {
     ModalBlock,
+    HardLessonPage,
     TimerComponent
   },
   data() {
     return {
       isModal: [],
+      hardMode: false,
       soundEffect: new Audio(require('../assets/sound_effect/explosion_3.mp3'))
     }
   },
@@ -64,6 +72,18 @@ export default {
 
       if(this.isModal[0] == false) this.$refs.timer.stopTimer();
     },
+    lessonResult() {
+      var result = ''
+      if(!this.isModal.length) {
+        result = 'がんばってね'
+      }else if(this.isModal[0] == false) {
+        result = 'クリアーだけれども5秒を切ったらハードモードになるよ'
+        this.hardMode = true
+      }else{
+        result = 'あと' + this.isModal.filter(n => n == true).length.toString() + '個'
+      }
+      return result
+    },
     animateBlocks() {
       anime({
         targets: '.modal-content',
@@ -96,6 +116,13 @@ export default {
   transition: opacity .5s;
 }
 .fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.basic-enter-active, .basic-leave-active {
+  transition: opacity 5s;
+}
+.basic-enter, .basic-leave-to {
   opacity: 0;
 }
 </style>
