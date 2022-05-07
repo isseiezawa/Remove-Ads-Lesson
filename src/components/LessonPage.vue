@@ -39,7 +39,7 @@ export default {
       if(!this.isModal.length) {
         result = 'がんばってね'
       }else if(this.isModal[0] == false) {
-        result = 'クリアー'
+        result = 'クリアーだけれども5秒を切ったらハードモードになるよ'
       }else{
         result = 'あと' + this.isModal.filter(n => n == true).length.toString() + '個'
       }
@@ -87,7 +87,7 @@ export default {
 
 <style>
 .box{
-  height: 40vh;
+  height: 10vh;
   margin: 0 auto;
   width: 10%;
 }
