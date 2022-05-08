@@ -16,6 +16,10 @@ export default new Router({
     {
       path: '/lesson',
       component: Lesson
+    },
+    {
+      path: '*',
+      component: Top
     }
   ]
 })
