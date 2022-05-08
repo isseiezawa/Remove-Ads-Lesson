@@ -1,18 +1,20 @@
 <template>
   <div>
     <div class="box">
-      <div v-for="amount in 5" :key="amount">
+      <div v-for="amount in isModal.length" :key="amount">
         <transition name="fade">
-          <modal-block v-if="isModal[amount-1]" @close-modal="handleCloseModal(amount)" :amount="amount" />
+          <modal-block v-show="isModal[amount-1]" @close-modal="handleCloseModal(amount)" :amount="amount" />
         </transition>
       </div>
     </div>
-    <timer-component ref="timer" />
-    <button @click="lessonStart" class="btn btn-warning">広告っぽいものを出す</button>
-    <h3>{{lessonResult()}}</h3>
+    <div class="border border-warning rounded shadow">
+      <timer-component ref="timer" :name="modeName" />
+      <button @click="lessonStart" class="btn btn-warning">広告っぽいものを出す</button>
+      <p class="mt-3">{{lessonResult()}}</p>
+    </div>
     <transition name="basic">
-      <div v-if="hardMode">
-        <hard-lesson-page />
+      <div v-show="hardMode">
+        <hard-lesson-page ref="resultHard" :nomal-url="nomalUrl" />
       </div>
     </transition>
   </div>
@@ -34,8 +36,10 @@ export default {
   },
   data() {
     return {
+      modeName: 'ノーマルモード',
       isModal: [],
       hardMode: false,
+      nomalUrl: '',
       soundEffect: new Audio(require('../assets/sound_effect/explosion_3.mp3'))
     }
   },
@@ -49,14 +53,16 @@ export default {
       this.handleCreateModal();
     },
     handleCreateModal() {
-      this.isModal = [true, true, true, true, true]
+      this.isModal = []
+      for(var i = 0; i < 10; i++) {
+        this.isModal.push(true)
+      }
     },
     handleCloseModal(e) {
       this.soundEffect.load();
       this.soundEffect.currentTime= 0;
       this.soundEffect.play();
       this.isModal.splice(e-1, 1, false);
-      console.log(this.isModal)
 
       if(this.isModal[0] == false) this.$refs.timer.stopTimer();
     },
@@ -65,8 +71,15 @@ export default {
       if(!this.isModal.length) {
         result = 'がんばってね'
       }else if(this.isModal[0] == false) {
-        result = 'クリアーだけれども5秒を切ったらハードモードになるよ'
-        this.hardMode = true
+
+        if(this.$refs.timer.minutes == 0 && this.$refs.timer.seconds < 22) {
+          result = 'ハードモードへのチャレンジを許します。' 
+          this.hardMode = true
+          this.nomalUrl = 'ノーマルモード : ' + this.$refs.timer.minutes + '分' + this.$refs.timer.seconds + '秒' + this.$refs.timer.milliSeconds
+        }else{
+          result = 'クリアーだけれども22秒を切ったらハードモードになるよ'
+        }
+
       }else{
         result = 'あと' + this.isModal.filter(n => n == true).length.toString() + '個'
       }
@@ -76,7 +89,7 @@ export default {
       anime({
         targets: '.modal-content',
         translateY: function() {
-          return anime.random(-30, 30) + 'vh';
+          return anime.random(-40, 50) + 'vh';
         },
         duration: 1000,
         delay: anime.stagger(100),
