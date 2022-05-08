@@ -36,7 +36,11 @@
         <path d="M368.16 370.188C368.057 368.781 365.563 368.548 366.212 366.661C366.999 364.372 370.286 365.998 370.502 367.903C370.625 368.988 370.638 369.649 369.712 370.255C369.419 370.447 368.889 369.798 368.677 370.077C368.485 370.33 368.544 370.853 368.234 370.92C367.994 370.972 368.177 370.433 368.16 370.188Z" fill="none" fill-rule="evenodd" opacity="1" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
       </g>
     </svg>
-    <router-link to="/lesson">広告を消しにいく</router-link>
+    <hr>
+    <h3>広告っぽいものを消すだけのアプリです</h3>
+    <h4>※音が出ます</h4>
+    <p>ノーマルモードでは右上に数字があるので、<br />大きい順に消していってください。</p>
+    <router-link to="/lesson" class="lesson-link btn btn-info">広告を消しにいく</router-link>
   </div>
 </template>
 
@@ -60,3 +64,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h4 {
+  color: red;
+}
+
+.lesson-link {
+  color: rgb(15, 5, 167);
+  font-size: 50px;
+  border-bottom: solid 2px black;
+}
+</style>
