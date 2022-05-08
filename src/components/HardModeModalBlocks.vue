@@ -13,7 +13,7 @@ export default {
   computed: {
     randomAds() {
       // src属性は、静的に指定するときと動的に指定するときで参照方法が変わるためrequire使用
-      return require('@/assets/images/ads_' + Math.floor( Math.random() * 2 + 1).toString() + '.png')
+      return require('@/assets/images/ads_' + Math.floor( Math.random() * 3 + 1).toString() + '.png')
     }
   },
   methods: {
@@ -28,6 +28,7 @@ export default {
 .hard-modal-block {
   position: absolute;
   left: 50%;
+  z-index: 2;
 }
 
 img {
