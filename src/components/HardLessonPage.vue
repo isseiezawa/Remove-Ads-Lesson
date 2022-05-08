@@ -50,7 +50,7 @@ export default {
       } else if(this.nomalUrl.length && this.url) {
         twitterResultUrl += this.nomalUrl + '%0d' + this.url
       }
-      twitterResultUrl += '%0dで広告を消しました。'
+      twitterResultUrl += '%0dで広告を消しました。%0d https://remove-ads-lesson.herokuapp.com/'
       return  twitterResultUrl
     }
   },
