@@ -1,0 +1,7 @@
+body {
+  background-color: rgb(219, 249, 239)!important;
+  height: 1000px;
+  background-image: url('ads_background_image.png');
+  background-repeat: repeat; 
+  background-size: 10vh;
+}

@@ -1,6 +1,6 @@
 <template>
-  <div class="center aligned row">
-    <h1 class="ui header">結果</h1>
+  <div class="pt-3 center aligned row">
+    <h3 class="ui header">[ {{name}} ]結果</h3>
     <div class="column">
       <h3 class="">
         {{ minutes | zeroPad }} :
@@ -24,6 +24,9 @@ export default {
       isRunning: false
     }
   },
+  props: [
+    'name'
+  ],
   methods: {
     // 現在時刻から引数に渡した数値を startTime に代入
     setSubtractStartTime: function (time) {
