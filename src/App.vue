@@ -14,7 +14,6 @@ export default {
 .container {
   text-align: center;
   margin-top: 60px;
-  height: 100vh;
   border-radius: 10%;
 }
 
