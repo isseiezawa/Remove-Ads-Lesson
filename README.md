@@ -1,24 +1,5 @@
-# remove_ads_lesson
+# 広告を消すだけのアプリです
 
-## Project setup
-```
-yarn install
-```
+![スクリーンショット 2023-03-08 20 09 50](https://user-images.githubusercontent.com/89014751/223698681-4e256387-2c62-4412-877b-66788860cc2a.png)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![スクリーンショット 2023-03-08 20 10 52](https://user-images.githubusercontent.com/89014751/223698660-f56362ec-7488-4bf7-b813-19b765d19a08.png)
